@@ -1,7 +1,0 @@
-Create a version of the font for 
-
-* Accent
-* Invert
-* Invert with accent
-
-That way it only needs to do blend modes once!
