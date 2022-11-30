@@ -1,0 +1,29 @@
+body{
+  background-color:#444444;
+  color:#dddddd;
+  font-family:monospace;
+  width:50rem;
+  margin:2rem auto;
+}
+
+h1{
+  font-size:1.5rem;
+  margin-bottom:0;
+}
+
+h2{
+  font-weight:bold;
+}
+h3{
+  font-weight:normal;
+  text-decoration:underline;
+}
+
+code{
+  background-color:#222222;
+  color:#9a9a9a;
+  display:block;
+  margin-left:2em;
+  margin-right:4em;
+  padding:1rem;
+}

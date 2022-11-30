@@ -1,0 +1,117 @@
+// Assert checks the token pointer and asserts that the type of the token is
+// equal to the first argument, and the content to the optional second.
+
+// FOR GOING TO ELSE: loop ahead in the commands starting with a count of 1
+// and increasing on every if hit, and lowering by 1 on every else hit. If
+// it is 0 then end the jump
+// FOR REACHING AN ELSE: Skip to the next line number command.
+
+while not eof
+	expect line
+
+expect line{
+	expect line-number
+	expect commands
+}
+
+expect commands{
+	expect command
+	while current token is : or ELSE (checked after a command to see if there is more on the line)
+		if current token is ELSE
+			add the else to the code, with the argument of the current if ID
+		expect command
+}
+
+expect line-number{
+	add line-number with current token
+}
+
+expect command{
+	nextToken
+	
+	if token is an "if" --
+		expect if
+	if token is a "dim"
+		expect dim
+	if token is a "for"
+		expect for
+	if token is a varialble --
+		expect decelaration
+	if token is a "next" -- 
+		expect next
+	if token is a function --
+		expect function
+}
+
+expect next{
+	assert("variable")
+	push next command using variable name as the argument.	
+}
+
+expect declaration{
+	store variable name
+	nextToken()
+	if token content is "="
+		nextToken()
+		expect expression
+		assign command using variable name
+	else
+		assert("parens","(")
+		nextToken()
+		expect arguments		
+}
+
+expect for{
+	nextToken()
+	assert("variable")
+	store variable name
+	nextToken()
+	assert("operator","=")
+	nextToken 
+	expect expressionif
+	assert("keyword","to")
+	nextToken 
+	expect expression
+	push for commmand with varible name as argument
+}
+
+expect function{
+	add command with current token
+	next token
+	expect arguments
+}
+
+expect dim{
+	nextToken // On arrayname
+	arrayName = current token
+	nextToken // On (
+	nextToken // On start of expression
+	expect arguments
+	push arrayName
+	push dim command
+}
+
+expect if{
+	nextToken
+	expect expression
+	add if command
+	add the if ID to the if ID stack.
+	expect commands
+}
+
+expect arguments{
+	while current token is not : or \n
+		expect expression
+		nextToken
+	Add num args command
+}
+
+expect expression{
+	generate code from expression
+	tokens that are not in the expression set terminate the expression.
+		Includes: , : @ ! & Functions ETC.
+		In addition, a closing paren when all are closed signals the end
+			This is for arrays.
+	add the correct commands as they appear
+	(ends on the terminating character)
+}

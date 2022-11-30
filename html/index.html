@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>BA Computer</title>
+	<style>
+		body{
+			background-color:black;
+			color:white;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			height:100vh;
+			overflow:hidden;
+			flex-direction:column;
+		}	
+		#screen-canvas{
+			width:720px;
+			height:552px;
+			
+			box-shadow:0px 0px 10000px #555555;
+
+			image-rendering: optimizeSpeed;             
+			image-rendering: -moz-crisp-edges;          
+			image-rendering: -webkit-optimize-contrast; 
+			image-rendering: -o-crisp-edges;            
+			image-rendering: pixelated;                 
+			-ms-interpolation-mode: nearest-neighbor;   
+		}
+		
+		#font-canvas{
+			display:none;
+			image-rendering:pixelated;
+		}
+	</style>
+</head>
+<body> 
+
+	<button onclick="document.querySelector('.inputFile').click();" id="loadfile" style="display:none;">Select File ...</button>
+	<input class="inputFile" type="file" id="fileinput" style="display:none;">
+
+	<script src="../js/jszip.min.js"></script>
+	<script src="../js/saveas.min.js"></script>
+	<script src="../js/canvastoblob.js"></script>
+	
+	<canvas width="240" height="184" id="screen-canvas">Your browser does not support canvas.</canvas>
+	<canvas width="760" height="16" id="font-canvas">Your browser does not support canvas</canvas>
+	<script src="../js/config.js"></script>
+	<script src="../js/string.js"></script>
+	<script src="../js/screen.js"></script>
+	<script src="../js/home.js"></script>
+	<script src="../js/editor.js"></script>
+	<script src="../js/runner.js"></script>
+	<script src="../js/keycode.js"></script>
+	<script src="../js/input.js"></script>
+	<script src="../js/tokenizer.js"></script>
+	<script src="../js/vm.js"></script>
+	<script src="../js/compiler.js"></script>
+	<script src="../js/font-editor.js"></script>
+	<script src="../js/state-machine.js"></script>
+	<script src="../js/wad.min.js"></script>
+	<script src="../js/music.js"></script>
+	<script src="../js/index.js"></script>
+	<p id="fps"></p>
+	<p id="amount"></p>
+</body>
+</html>
